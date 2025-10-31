@@ -1,0 +1,421 @@
+/* ==========================
+   SISTEMA DE DESIGN
+========================== */
+:root {
+  /* Paleta de cores (8 cores mínimas) */
+  --color-primary: #2563eb;
+  --color-primary-light: #3b82f6;
+  --color-secondary: #10b981;
+  --color-secondary-light: #34d399;
+  --color-neutral-100: #f9fafb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-500: #6b7280;
+  --color-neutral-800: #1f2937;
+
+  /* Tipografia (5 tamanhos hierárquicos) */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+
+  /* Espaçamento modular */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+
+  --radius: 8px;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================
+   REGRAS GERAIS E LAYOUT
+========================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+  line-height: 1.5;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* ==========================
+   CABEÇALHO E NAVEGAÇÃO
+========================== */
+header {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-2);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand {
+  font-weight: bold;
+  font-size: var(--font-size-lg);
+}
+
+/* Menu desktop */
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background: white;
+  color: var(--color-neutral-800);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-width: 180px;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-menu a {
+  padding: var(--space-2);
+  color: var(--color-neutral-800);
+}
+
+.dropdown-menu a:hover {
+  background: var(--color-neutral-300);
+}
+
+/* Menu Mobile */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-lg);
+  color: white;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  background: var(--color-primary-light);
+  padding: var(--space-2);
+  text-align: center;
+}
+
+.mobile-menu.open {
+  display: block;
+}
+
+.mobile-menu a {
+  display: block;
+  color: white;
+  padding: var(--space-1);
+  font-weight: 500;
+}
+
+/* ==========================
+   GRID E LAYOUT PRINCIPAL
+========================== */
+main {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Sidebar */
+.sidebar {
+  background: white;
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Conteúdo principal */
+.content {
+  background: white;
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* ==========================
+   GRID CUSTOM (12 COLUNAS)
+========================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-3);
+}
+
+.card {
+  grid-column: span 4;
+  background: var(--color-neutral-100);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-buttons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* ==========================
+   COMPONENTES DE INTERFACE
+========================== */
+
+/* Botões */
+.btn {
+  border: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: var(--font-size-md);
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-light);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-light);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--color-neutral-300);
+}
+
+.btn-ghost:hover {
+  background: var(--color-neutral-300);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Alertas */
+.alert {
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-2);
+}
+
+.alert-success {
+  background: var(--color-secondary-light);
+  color: white;
+}
+
+/* Badges e Tags */
+.badge {
+  background: var(--color-primary);
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.tag {
+  background: var(--color-neutral-300);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-800);
+}
+
+/* Formulários */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-2);
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input {
+  border: 1px solid var(--color-neutral-300);
+  padding: var(--space-1);
+  border-radius: var(--radius);
+}
+
+input.invalid {
+  border-color: red;
+}
+
+.form-error {
+  color: red;
+  font-size: var(--font-size-xs);
+  margin-top: 2px;
+}
+
+/* Toasts */
+.toasts {
+  position: fixed;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  z-index: 1000;
+}
+
+.toast {
+  background: var(--color-secondary);
+  color: white;
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: fadeInOut 4s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Modais */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* ==========================
+   RODAPÉ
+========================== */
+footer {
+  text-align: center;
+  padding: var(--space-3);
+  background: var(--color-primary);
+  color: white;
+  font-size: var(--font-size-sm);
+}
+
+/* ==========================
+   RESPONSIVIDADE (5 BREAKPOINTS)
+========================== */
+@media (max-width: 1200px) {
+  .card { grid-column: span 6; }
+}
+
+@media (max-width: 992px) {
+  main { grid-template-columns: 200px 1fr; }
+  .content-header { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 768px) {
+  main { grid-template-columns: 1fr; }
+  .sidebar { order: 2; }
+  .content { order: 1; }
+  nav ul { display: none; }
+  .hamburger { display: block; }
+}
+
+@media (max-width: 576px) {
+  .card { grid-column: span 12; }
+  .btn { width: 100%; text-align: center; }
+}
+
+@media (max-width: 400px) {
+  body { font-size: var(--font-size-sm); }
+}

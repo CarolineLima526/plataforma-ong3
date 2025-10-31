@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projeto - Design System & UI Components</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav-inner">
+        <div class="brand">Projeto UI • Design System</div>
+        <nav>
+          <button class="hamburger" id="hamburger" aria-label="Abrir menu">☰</button>
+          <ul id="main-menu">
+            <li><a href="#">Início</a></li>
+            <li class="dropdown" tabindex="0">
+              <a href="#">Recursos ▾</a>
+              <div class="dropdown-menu" role="menu">
+                <a href="#">Design System</a>
+                <a href="#">Componentes</a>
+                <a href="#">Documentação</a>
+              </div>
+            </li>
+            <li><a href="#">Projetos</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Menu mobile -->
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <a href="#">Início</a><br>
+        <a href="#">Recursos</a><br>
+        <a href="#">Projetos</a><br>
+        <a href="#">Contato</a>
+      </div>
+    </header>
+
+    <main>
+      <aside class="sidebar">
+        <h4 style="margin-top:0">Painel</h4>
+        <div class="alert alert-success">Tudo funcionando — design system carregado.</div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge">Novo</span>
+          <span class="badge">Importante</span>
+          <span class="tag">Tag: UI</span>
+        </div>
+
+        <hr>
+        <h5>Formulário (validação)</h5>
+        <form id="sample-form" novalidate>
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input id="name" name="name" required placeholder="Seu nome">
+            <div class="form-error" data-for="name"></div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" required placeholder="seu@exemplo.com">
+            <div class="form-error" data-for="email"></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary" type="submit">Enviar</button>
+            <button class="btn btn-ghost" type="reset">Limpar</button>
+          </div>
+        </form>
+
+        <hr>
+        <p style="font-size:13px;color:var(--color-neutral-500)">Espaçamentos modulares: 8 / 16 / 24 / 32 / 48 / 64</p>
+      </aside>
+
+      <section class="content">
+        <div class="content-header">
+          <div>
+            <h1>Dashboard de Projetos</h1>
+            <p>Exemplos de componentes e leiautes responsivos</p>
+          </div>
+          <div class="content-actions">
+            <button class="btn btn-secondary" id="open-modal">Abrir modal</button>
+            <button class="btn btn-primary" id="show-toast">Mostrar toast</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Projeto A <span class="badge" style="float:right">Em andamento</span></h3>
+            <p>Descrição curta do projeto. Usa grid 12 colunas para organizar o layout.</p>
+            <div class="card-buttons">
+              <button class="btn btn-primary">Ver</button>
+              <button class="btn btn-ghost">Editar</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Projeto B <span class="badge">Novo</span></h3>
+            <p>Card responsivo com flexbox interno para alinhar botões.</p>
+            <div class="card-buttons">
+              <button class="btn btn-primary">Ver</button>
+              <button class="btn btn-ghost">Editar</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Projeto C <span class="badge">Concluído</span></h3>
+            <p>Use classes utilitárias .col-* para posicionar elementos na grid de 12 colunas.</p>
+            <div class="card-buttons">
+              <button class="btn btn-primary">Ver</button>
+              <button class="btn btn-ghost">Editar</button>
+            </div>
+          </article>
+        </div>
+
+        <hr>
+
+        <section>
+          <h3>Exemplos de componentes</h3>
+          <div class="button-row">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      Feito para entrega — Sistema de design, leiautes responsivos, navegação e componentes.
+    </footer>
+
+    <div class="toasts" id="toasts" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="modal" role="document">
+        <h3>Modal de exemplo</h3>
+        <p>Este modal demonstra componente de feedback com foco e fechamento via JS.</p>
+        <div class="modal-buttons">
+          <button class="btn btn-ghost" id="close-modal">Fechar</button>
+          <button class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Menu mobile
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('open');
+      mobileMenu.setAttribute('aria-hidden', String(!open));
+    });
+
+    // Toasts
+    const toastsRoot = document.getElementById('toasts');
+    function showToast(message, timeout = 4000) {
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = message;
+      toastsRoot.appendChild(el);
+      setTimeout(() => el.remove(), timeout);
+    }
+    document.getElementById('show-toast').addEventListener('click', () => showToast('Toast de exemplo — ação efetuada'));
+
+    // Modal
+    const modal = document.getElementById('modal');
+    document.getElementById('open-modal').addEventListener('click', () => modal.classList.add('open'));
+    document.getElementById('close-modal').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+
+    // Form validation visual
+    const form = document.getElementById('sample-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = form.querySelector('#name');
+      const email = form.querySelector('#email');
+      let valid = true;
+      form.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+      [name, email].forEach(inp => inp.classList.remove('invalid'));
+
+      if (!name.value.trim()) { valid = false; name.classList.add('invalid'); form.querySelector('[data-for="name"]').textContent = 'Nome é obrigatório.'; }
+      if (!email.value.trim() || !/\\S+@\\S+\\.\\S+/.test(email.value)) { valid = false; email.classList.add('invalid'); form.querySelector('[data-for="email"]').textContent = 'E-mail inválido.'; }
+
+      if (valid) { showToast('Formulário enviado com sucesso!'); form.reset(); }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') modal.classList.remove('open');
+    });
+  </script>
+</body>
+</html>
